@@ -1,37 +1,14 @@
-from datetime import datetime
-from sqlalchemy import create_engine, Column, Integer, String, Float, DateTime
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+from models import Base
 
-Base = declarative_base()
+import os
+from dotenv import load_dotenv
+# Load environment variables from .env file
+load_dotenv()
 
-class Ingredient(Base):
-    """Represents ingredients and their quantities in the machine."""
-    __tablename__ = 'ingredients'
 
-    id = Column(Integer, primary_key=True)
-    name = Column(String, unique=True)  # Ingredient name (e.g., water, milk)
-    quantity = Column(Float)  # Current quantity available
-    max_capacity = Column(Float)  # Maximum capacity
-
-class ServedBeverage(Base):
-    """Records served beverages with timestamp, ingredients, and result."""
-    __tablename__ = 'served_beverages'
-
-    id = Column(Integer, primary_key=True)
-    beverage_type = Column(String)
-    timestamp = Column(DateTime, default=datetime.utcnow)
-    ingredients = Column(String)
-    result = Column(String)
-
-class IngredientRefill(Base):
-    """Tracks ingredient refills with timestamp and quantity added."""
-    __tablename__ = 'ingredient_refills'
-
-    id = Column(Integer, primary_key=True)
-    ingredient_id = Column(Integer)
-    timestamp = Column(DateTime, default=datetime.utcnow)
-    quantity_added = Column(Float)
+database_url = 'LIDIHOGIHODGIH'
 
 class IngredientManager:
     """Manages ingredient levels and refills."""
@@ -126,9 +103,15 @@ class Tea(Beverage):
 
 class CoffeeMachine:
     """Simulates a coffee machine and handles beverage making."""
-    def __init__(self, session, ingredient_manager):
-        self.session = session
-        self.ingredient_manager = ingredient_manager
+    def __init__(self):
+        # Set up SQLAlchemy engine, database tables and create a session
+        self.engine = create_engine(database_url)
+        Base.metadata.create_all(self.engine)
+        Session = sessionmaker(bind=self.engine)
+        self.session = Session()
+        # Initialize IngredientManager
+        self.ingredient_manager = IngredientManager(self.session)
+
 
     def gather_user_input(self):
         """Gather user input for milk, froth, and strength."""
@@ -158,27 +141,4 @@ class CoffeeMachine:
             return result
         except ValueError as e:
             return str(e)
-
-def main():
-    # Set up SQLAlchemy engine and create database tables here
-
-    # Create a session
-    Session = sessionmaker(bind=engine)
-    session = Session()
-
-    # Initialize IngredientManager
-    ingredient_manager = IngredientManager(session)
-
-    # Initialize CoffeeMachine
-    coffee_machine = CoffeeMachine(session, ingredient_manager)
-
-    # Make a coffee with milk, froth, and strength 2
-    coffee_result = coffee_machine.make_coffee(milk=True, froth=True, strength=2)
-    print(coffee_result)
-
-    # Make a tea with strength 1
-    tea_result = coffee_machine.make_tea(strength=1)
-    print(tea_result)
-
-if __name__ == "__main__":
-    main()
+        
