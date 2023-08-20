@@ -1,10 +1,15 @@
 import os
+from dotenv import load_dotenv
 from datetime import datetime
-from sqlalchemy import create_engine, Column, Integer, String, Float, DateTime, Boolean
+from sqlalchemy import create_engine, Column, Integer, String, DateTime, Boolean
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.sql import func
-from sqlalchemy.orm import declarative_base, sessionmaker
+from sqlalchemy.orm import declarative_base
 
+# Load environment variables from .env
+load_dotenv()
+
+DATABASE_URL = os.getenv("DATABASE_URL")
 Base = declarative_base()
 
 class Ingredient(Base):
@@ -27,17 +32,16 @@ class ServedBeverage(Base):
 
     id = Column(Integer, primary_key=True)
     timestamp = Column(DateTime(timezone=True), server_default=func.now(), default=datetime.utcnow)
-    beverage_type = Column(Integer)
-    milk_added = Column(Boolean)
-    frothed_milk = Column(Boolean, nullable=True)
+    beverage_type = Column(String)
+    milk_added = Column(Boolean, default=False)
     strength = Column(Integer)
-    ingredients = Column(String)
+    frothed_milk = Column(Boolean, nullable=True)
     result = Column(String)
 
     def __str__(self):
         # Represent the coffee cup as a string
         # Includes information about milk, froth, strength, etc.
-        return f"Your beverage cup served: ... <ServedBeverage(type='{self.beverage_type}', timestamp='{self.timestamp}', ingredients='{self.ingredients}')>"
+        return f"Your beverage cup served: ... <ServedBeverage(type='{self.beverage_type}', timestamp='{self.timestamp}', result='{self.result}')>"
 
 class IngredientRefill(Base):
     """Tracks ingredient refills with timestamp and quantity added."""
@@ -49,12 +53,10 @@ class IngredientRefill(Base):
     quantity_added = Column(Integer)
     
     def __str__(self):
-        # Implement a method to represent the coffee cup as a string
-        # Include information about milk, froth, strength, etc.
+        # Represent the coffee cup as a string
+        # May include information about milk, froth, strength, etc.
         return f"Your refill: ...{self.ingredient_id} added {self.quantity_added}"
     
 # Initialize the database engine and create tables if they don't exist
-DATABASE_URL = os.getenv("DATABASE_URL")
 engine = create_engine(DATABASE_URL)
 Base.metadata.create_all(engine)
-# SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
