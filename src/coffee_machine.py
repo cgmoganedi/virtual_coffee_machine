@@ -1,6 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from models import Base
+from beverage import Coffee, Tea
+from models import Base, Ingredient, IngredientRefill
 
 import os
 from dotenv import load_dotenv
@@ -29,6 +30,7 @@ class IngredientManager:
             ingredient.quantity = new_quantity
             self.session.add(IngredientRefill(ingredient_id=ingredient.id, quantity_added=quantity_added))
             self.session.commit()
+            print('Success fully increased {ingredient_name} by {quantity_added}')
         else:
             raise ValueError(f"Ingredient {ingredient_name} not found")
 
