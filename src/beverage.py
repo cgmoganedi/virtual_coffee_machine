@@ -32,7 +32,7 @@ class Coffee(Beverage):
         """Brew a coffee based on milk, froth, and strength options."""
         required_ingredients = {
             'water': 150,  # Common requirement for all strengths
-            'coffee_beans': 5 * self.strength,
+            'coffee_beans': 5 * self.strength
         }
         if self.milk:
             required_ingredients['milk'] = 50
@@ -43,7 +43,13 @@ class Coffee(Beverage):
             used_ingredients['milk'] = 50
         self.update_ingredient_levels(used_ingredients)
 
-        self.session.add(ServedBeverage(beverage_type='coffee', ingredients=str(required_ingredients), result="success"))
+        self.session.add(ServedBeverage(
+            beverage_type='coffee',
+            milk_added = self.milk,
+            frothed_milk = self.froth,
+            strength = self.strength,
+            result=str(required_ingredients)
+            ))
         self.session.commit()
 
         return f"Enjoy your coffee! ... {str(used_ingredients)}"
@@ -58,13 +64,18 @@ class Tea(Beverage):
         """Brew a tea based on strength option."""
         required_ingredients = {
             'water': 200, # Common requirement for all strengths
+            'tea_bags': 1 * self.strength
         }
         self.check_ingredient_levels(required_ingredients)
 
-        used_ingredients = {'water': 200}
+        used_ingredients = {'water': 200, 'tea_bags': 1}
         self.update_ingredient_levels(used_ingredients)
 
-        self.session.add(ServedBeverage(beverage_type='tea', ingredients=str(required_ingredients), result="success"))
+        self.session.add(ServedBeverage(
+            beverage_type='tea',
+            strength = self.strength,
+            result=str(required_ingredients),
+            ))
         self.session.commit()
 
         return f"Enjoy your tea! ... {str(used_ingredients)}"
