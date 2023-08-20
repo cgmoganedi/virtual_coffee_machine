@@ -1,5 +1,5 @@
 
-from coffee_machine import IngredientManager
+from beverage_machine import IngredientManager
 from models import Ingredient
 
 def seed_ingredients(session):

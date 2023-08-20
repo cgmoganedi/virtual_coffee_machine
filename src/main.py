@@ -1,5 +1,5 @@
 
-from coffee_machine import CoffeeMachine
+from beverage_machine import CoffeeMachine
 
 def main():
     # Initialize the CoffeeMachine

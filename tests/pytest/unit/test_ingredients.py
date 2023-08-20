@@ -1,5 +1,5 @@
 import pytest
-from coffee_machine import IngredientManager
+from beverage_machine import IngredientManager
 
 @pytest.fixture
 def ingredient_manager(session):

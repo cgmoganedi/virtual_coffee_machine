@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch
-from coffee_machine import CoffeeMachine
+from beverage_machine import CoffeeMachine
 
 # End-to-end tests cover the entire workflow of the application, simulating user interactions and verifying the final outcome.
 class TestCoffeeMachineEndToEnd(unittest.TestCase):

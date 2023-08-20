@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import Mock
-from coffee_machine import IngredientManager, Coffee, Tea
+from beverage_machine import IngredientManager, Coffee, Tea
 
 
 # Unit tests focus on testing individual components or functions in isolation to ensure they behave as expected.

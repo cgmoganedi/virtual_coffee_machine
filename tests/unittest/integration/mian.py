@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import Mock, patch
-from coffee_machine import CoffeeMachine
+from beverage_machine import CoffeeMachine
 
 # Integration tests verify that different components of the application work together as expected.
 
