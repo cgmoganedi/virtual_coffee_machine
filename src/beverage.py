@@ -1,3 +1,5 @@
+from models import ServedBeverage
+
 class Beverage:
     """Base class for beverages like coffee and tea."""
     def __init__(self, session, ingredient_manager):
@@ -29,7 +31,7 @@ class Coffee(Beverage):
     def brew(self):
         """Brew a coffee based on milk, froth, and strength options."""
         required_ingredients = {
-            'water': 150,
+            'water': 150,  # Common requirement for all strengths
             'coffee_beans': 5 * self.strength,
         }
         if self.milk:
@@ -44,7 +46,7 @@ class Coffee(Beverage):
         self.session.add(ServedBeverage(beverage_type='coffee', ingredients=str(required_ingredients), result="success"))
         self.session.commit()
 
-        return "Enjoy your coffee!"
+        return f"Enjoy your coffee! ... {str(used_ingredients)}"
 
 class Tea(Beverage):
     """Represents a tea beverage."""
@@ -55,14 +57,14 @@ class Tea(Beverage):
     def brew(self):
         """Brew a tea based on strength option."""
         required_ingredients = {
-            'water': 150,
+            'water': 200, # Common requirement for all strengths
         }
         self.check_ingredient_levels(required_ingredients)
 
-        used_ingredients = {'water': 150}
+        used_ingredients = {'water': 200}
         self.update_ingredient_levels(used_ingredients)
 
         self.session.add(ServedBeverage(beverage_type='tea', ingredients=str(required_ingredients), result="success"))
         self.session.commit()
 
-        return "Enjoy your tea!"
+        return f"Enjoy your tea! ... {str(used_ingredients)}"
