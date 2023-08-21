@@ -20,15 +20,11 @@ class IngredientManager:
         """Retrieve an ingredient by its name."""
         return self.session.query(Ingredient).filter_by(name=ingredient_name).first()
 
-    def refill_ingredient(self, ingredient_name, quantity_added):
+    def refill_ingredient(self, ingredient_name):
         """Refill an ingredient by updating its quantity."""
         ingredient = self.get_ingredient(ingredient_name)
         if ingredient:
-            new_quantity = ingredient.quantity + quantity_added
-            if new_quantity > ingredient.max_capacity:
-                raise ValueError(f"Refilling exceeds max capacity for {ingredient_name}")
-            ingredient.quantity = new_quantity
-            self.session.add(IngredientRefill(ingredient_id=ingredient.id, quantity_added=quantity_added))
+            ingredient.quantity = ingredient.max_capacity
             self.session.commit()
             print('Success fully increased {ingredient_name} by {quantity_added}')
         else:

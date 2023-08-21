@@ -53,6 +53,7 @@ The Coffee Machine Simulation is designed to replicate the experience of using a
 - The cup to pour into has a total rated capacity of 200 ml.
 - Strength-1 coffee requires 5g of coffee beans, strength-2 requires 10g, and strength-3 requires 15g.
 - Strength-1 tea requires 1 unit of a tea bag, strength-2 requires 2, and strength-3 requires 3.
+- Whenever we re-fill an ingredient we fill it to max capacity.
 
 ## Future Features
 

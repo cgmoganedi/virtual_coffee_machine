@@ -21,11 +21,11 @@ def seed_ingredients(session):
 def refill_all_ingredients(session):
     ingredient_manager = IngredientManager(session)
     ingredients = [
-        {'name': 'water', 'quantity_to_add': 500},
-        {'name': 'coffee_beans', 'quantity_to_add': 180},
-        {'name': 'tea_bags','quantity_to_add': 20},
-        {'name': 'milk', 'quantity_to_add': 200}
+        {'name': 'water'},
+        {'name': 'coffee_beans'},
+        {'name': 'tea_bags'},
+        {'name': 'milk'}
     ]
     
     for ingredient in ingredients:
-        ingredient_manager.refill_ingredient(ingredient.name, ingredient.quantity_to_add)
+        ingredient_manager.refill_ingredient(ingredient.name)
