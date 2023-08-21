@@ -11,7 +11,7 @@ load_dotenv()
 
 
 DATABASE_URL = os.getenv('DATABASE_URL')
-
+PREPARING = '\n⏳ Preparing your hot beverage ... ⏳\n'
 
 class IngredientManager:
     """Manages ingredient levels and refills."""
@@ -63,6 +63,7 @@ class CoffeeMachine:
     def make_coffee(self):
         """Make a coffee with specified options."""
         milk, froth, strength = self.gather_user_input()
+        print(PREPARING)
         coffee = Coffee(self.session, self.ingredient_manager,
                         milk, froth, strength)
         try:
@@ -74,6 +75,7 @@ class CoffeeMachine:
     def make_tea(self):
         """Make a tea with specified strength."""
         strength = int(input("Select strength for tea (1, 2, or 3): "))
+        print(PREPARING)
         tea = Tea(self.session, self.ingredient_manager, strength)
         try:
             result = tea.brew()
