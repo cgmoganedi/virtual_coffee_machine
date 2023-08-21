@@ -28,8 +28,8 @@ def main():
             print(shutting_down)
             break
         else:
-            beverage_doesnt_exist = 'Beverage does not exist!\n'
-            print(beverage_doesnt_exist)
+            invalid_beverage_choice = 'You\'ve entered an invalid beverage choice, enter 1 or 2.\n'
+            print(invalid_beverage_choice)
 
 if __name__ == '__main__':
     main()
