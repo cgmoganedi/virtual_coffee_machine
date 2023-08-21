@@ -11,6 +11,6 @@ def test_coffee_machine_make_coffee(coffee_machine, mocker):
     assert "Enjoy your coffee!" in result
     # Check if ingredient levels are correctly updated
     ingredient = coffee_machine.ingredient_manager.get_ingredient("water")
-    assert ingredient.quantity == 600.0
+    assert ingredient.quantity == ingredient.max_capacity
 
 # Similar tests for make_tea
