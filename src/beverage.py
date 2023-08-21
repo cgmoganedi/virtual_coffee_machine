@@ -31,17 +31,15 @@ class Coffee(Beverage):
     def brew(self):
         """Brew a coffee based on milk, froth, and strength options."""
         required_ingredients = {
-            'water': 150,  # Common requirement for all strengths
+            'water': 200,  # Common requirement for all strengths
             'coffee_beans': 5 * self.strength
         }
         if self.milk:
             required_ingredients['milk'] = 50
+            required_ingredients['water'] = 150
+            required_ingredients['frothed_milk']: self.frothed_milk
         self.check_ingredient_levels(required_ingredients)
-
-        used_ingredients = {'water': 150}
-        if self.milk:
-            used_ingredients['milk'] = 50
-        self.update_ingredient_levels(used_ingredients)
+        self.update_ingredient_levels(required_ingredients)
 
         self.session.add(ServedBeverage(
             beverage_type='coffee',
@@ -52,7 +50,7 @@ class Coffee(Beverage):
             ))
         self.session.commit()
 
-        return f"Enjoy your coffee! ... {str(used_ingredients)}"
+        return f"Enjoy your coffee! ... {str(required_ingredients)}"
 
 class Tea(Beverage):
     """Represents a tea beverage."""
