@@ -13,16 +13,20 @@ def main():
     
     while True:
         # Gather user input for beverage customization
-        beverage_choice = input('Would you like 1 - Coffee or 2 - Tea? (1 or 2, or X): ')
-        if int(beverage_choice) == 1:
+        beverage_choice = input('Would you like 1 - Coffee or 2 - Tea? (1 or 2, or X): ').lower()
+        if beverage_choice == '1':
             # Make a coffee beverage
             coffee_result = beverage_machine.make_coffee()
             print(coffee_result)
-        elif int(beverage_choice) == 2:
+        elif beverage_choice == '2':
             # Make a tea beverage
             tea_result = beverage_machine.make_tea()
             print(tea_result)
-        elif beverage_choice.lower() == 'x':
+        elif beverage_choice == 'r':
+            # Re-fill all the igredients
+            refill_result = beverage_machine.refill_all_ingredients()
+            print(refill_result)
+        elif beverage_choice == 'x':
             # Shut down the machine
             shutting_down = 'Shutting down the Hot Beverage Machine! ...\n'
             print(shutting_down)
