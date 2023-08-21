@@ -21,17 +21,38 @@ The Coffee Machine Simulation is designed to replicate the experience of using a
 ## How to Use
 
 1. Clone the repository to your local machine.
-2. Install the required packages using `pip install -r requirements.txt`.
-3. Set up the database and tables for ingredient management and served beverages.
-4. Run the `coffee_machine.py` script to interact with the Coffee Machine Simulation.
-5. Follow the on-screen prompts to select options and make coffee or tea.
+2. Create and activate virtual enviroment.
+3. Install the required packages.
+4. Set up the database and tables for ingredient management and served beverages.
+5. Run the `main.py` script to interact with the Coffee Machine Simulation.
+6. Follow the on-screen prompts to select options and make coffee or tea.
+
+
+## Installation
+
+1. Clone the repository:
+   `git clone https://github.com/cgmoganedi/virtual_coffee_machine.git && cd virtual_coffee_machine`
+
+2. Set up a virtual environment:
+    Make sure you have Python >= 3.11 installed on the system then create a virtual environment and activate it like so:
+    `python -m venv venv && source venv/Scripts/activate` or `python -m venv venv && ./venv/Scripts/activate` depending on the terminal used.
+
+3. Install the required packages:
+    `pip install -r requirements.txt` or manually like so: `pip install python-dotenv pytest pytest-cov pytest-html`
+
+4. Create a `.env` file in the project root and add your Dropbox access token :
+    `cp .env.example .env`
+    and add or modify in it to the correct env values:
+    DATABASE_URL=<your_database_url_here>
 
 ## Assumptions
 
-- Each beverage costs 150 ml of water and 50 ml of milk (if added).
-- The maximum capacity for water, milk, and coffee beans is 750 ml, 250 ml, and 250 grams, respectively.
-- The cup to pour into has a total capacity of 200 ml.
+- Each beverage costs 200ml or 150 ml of water and 50 ml of milk (if added).
+- A coffee beans (or tea bags) do not contribute to the volume of the beverage served.
+- The maximum capacity for water, milk, and coffee beans, tea bags is 750 ml, 250 ml, 250 grams, and 50 units, respectively.
+- The cup to pour into has a total rated capacity of 200 ml.
 - Strength-1 coffee requires 5g of coffee beans, strength-2 requires 10g, and strength-3 requires 15g.
+- Strength-1 tea requires 1 unit of a tea bag, strength-2 requires 2, and strength-3 requires 3.
 
 ## Future Features
 
@@ -66,9 +87,6 @@ This design supports team collaboration by providing clear boundaries and respon
 For testing, the simulation includes unit tests, end-to-end tests, and integration tests to ensure the functionality, user interactions, and component interactions are thoroughly validated.
 
 ---
-
-Feel free to customize and expand the README.md file as needed. This template provides a starting point to communicate the purpose, usage, assumptions, future features, and design considerations of your Coffee Machine Simulation.
-
 
 
 Virtual Coffee and Tea Machine Simulation
