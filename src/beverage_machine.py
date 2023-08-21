@@ -15,6 +15,7 @@ DATABASE_URL = os.getenv('DATABASE_URL')
 
 class IngredientManager:
     """Manages ingredient levels and refills."""
+
     def __init__(self, session):
         self.session = session
 
@@ -28,12 +29,15 @@ class IngredientManager:
         if ingredient:
             ingredient.quantity = ingredient.max_capacity
             self.session.commit()
-            print(f'Successfully increased {ingredient_name} by {ingredient.max_capacity}')
+            print(
+                f'Successfully increased {ingredient_name} by {ingredient.max_capacity}')
         else:
             raise ValueError(f"Ingredient {ingredient_name} not found")
 
+
 class CoffeeMachine:
     """Simulates a coffee machine and handles beverage making."""
+
     def __init__(self):
         # Set up SQLAlchemy engine, database tables and create a session
         self.engine = create_engine(DATABASE_URL)
@@ -45,7 +49,7 @@ class CoffeeMachine:
         # Seed the ingredient at first
         # seed_ingredients(self.session)
 
-    def refill_all_ingredients(self)-> str:
+    def refill_all_ingredients(self) -> str:
         return refill_all_ingredients(self.ingredient_manager)
 
     def gather_user_input(self):
@@ -56,11 +60,12 @@ class CoffeeMachine:
             froth = input("Froth milk? (yes/no): ").lower() == "yes"
         strength = int(input("Select strength (1, 2, or 3): "))
         return milk, froth, strength
-    
+
     def make_coffee(self):
         """Make a coffee with specified options."""
         milk, froth, strength = self.gather_user_input()
-        coffee = Coffee(self.session, self.ingredient_manager, milk, froth, strength)
+        coffee = Coffee(self.session, self.ingredient_manager,
+                        milk, froth, strength)
         try:
             result = coffee.brew()
             return result
@@ -76,4 +81,3 @@ class CoffeeMachine:
             return result
         except ValueError as e:
             return str(e)
-        

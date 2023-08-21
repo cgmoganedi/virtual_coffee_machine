@@ -1,7 +1,8 @@
 
 from models import Ingredient
 
-def seed_ingredients(session)-> None:
+
+def seed_ingredients(session) -> None:
     # Ingredient names and their initial quantities
     initial_ingredients = [
         {'name': 'water', 'max_capacity': 750, 'unit_of_measure': 'ml'},
@@ -18,21 +19,21 @@ def seed_ingredients(session)-> None:
         session.commit()
     except ValueError as e:
         print('Could not seed.', e)
-    
 
-def refill_all_ingredients(ingredient_manager)-> str:
+
+def refill_all_ingredients(ingredient_manager) -> str:
     ingredients = [
         {'name': 'water'},
         {'name': 'coffee_beans'},
         {'name': 'tea_bags'},
         {'name': 'milk'}
     ]
-    
+
     try:
         for ingredient in ingredients:
             ingredient_manager.refill_ingredient(ingredient['name'])
-            
+
         return 'Successfully refilled all the ingredients'
-    
+
     except ValueError as e:
         print('Could not re-fill.', e)

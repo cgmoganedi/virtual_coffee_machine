@@ -1,19 +1,21 @@
 
 from beverage_machine import CoffeeMachine
 
+
 def main():
     # Initialize the CoffeeMachine
     beverage_machine = CoffeeMachine()
-    
+
     welcome = 'Welcome to the Hot Beverage Machine!\n'
     print(welcome)
-    
+
     how_to_shut = 'Enter X to shutdown the machine!\n'
     print(how_to_shut)
-    
+
     while True:
         # Gather user input for beverage customization
-        beverage_choice = input('Would you like 1 - Coffee or 2 - Tea? (1 or 2, or X): ').lower()
+        beverage_choice = input(
+            'Would you like 1 - Coffee or 2 - Tea? (1 or 2, or X): ').lower()
         if beverage_choice == '1':
             # Make a coffee beverage
             coffee_result = beverage_machine.make_coffee()
@@ -34,6 +36,7 @@ def main():
         else:
             invalid_beverage_choice = 'You\'ve entered an invalid beverage choice, enter 1 or 2.\n'
             print(invalid_beverage_choice)
+
 
 if __name__ == '__main__':
     main()

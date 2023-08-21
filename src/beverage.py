@@ -31,13 +31,14 @@ class Coffee(Beverage):
     def brew(self):
         """Brew a coffee based on milk, froth, and strength options."""
         required_ingredients = {
-            'water': 200,  # Common requirement for all strengths
+            'water': 200,
             'coffee_beans': 5 * self.strength
         }
         if self.milk:
             required_ingredients['milk'] = 50
             required_ingredients['water'] = 150
-            required_ingredients['frothed_milk']: self.frothed_milk
+            required_ingredients['frothed_milk'] = self.frothed_milk
+        
         self.check_ingredient_levels(required_ingredients)
         self.update_ingredient_levels(required_ingredients)
 
@@ -61,7 +62,7 @@ class Tea(Beverage):
     def brew(self):
         """Brew a tea based on strength option."""
         required_ingredients = {
-            'water': 200, # Common requirement for all strengths
+            'water': 200,
             'tea_bags': 1 * self.strength
         }
         self.check_ingredient_levels(required_ingredients)

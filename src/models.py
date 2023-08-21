@@ -12,26 +12,30 @@ load_dotenv()
 DATABASE_URL = os.getenv("DATABASE_URL")
 Base = declarative_base()
 
+
 class Ingredient(Base):
     """Represents ingredients and their quantities in the machine."""
     __tablename__ = 'ingredients'
 
     id = Column(Integer, primary_key=True)
-    name = Column(String, unique=True, index=True)  # Ingredient name (e.g., water, milk)
+    # Ingredient name (e.g., water, milk)
+    name = Column(String, unique=True, index=True)
     quantity = Column(Integer, default=0)  # Current quantity available
     max_capacity = Column(Integer)  # Maximum capacity
     unit_of_measure = Column(String)  # e.g., ml, grams
-    
+
     def __str__(self):
         # Represent the beverage ingredient as a string
         return f"Your beverage ingredient: ...{self.name}"
+
 
 class ServedBeverage(Base):
     """Records served beverages with timestamp, ingredients, and result."""
     __tablename__ = 'served_beverages'
 
     id = Column(Integer, primary_key=True)
-    timestamp = Column(DateTime(timezone=True), server_default=func.now(), default=datetime.utcnow)
+    timestamp = Column(DateTime(timezone=True),
+                       server_default=func.now(), default=datetime.utcnow)
     beverage_type = Column(String)
     milk_added = Column(Boolean, default=False)
     strength = Column(Integer)
@@ -42,7 +46,8 @@ class ServedBeverage(Base):
         # Represent the coffee cup as a string
         # Includes information about milk, froth, strength, etc.
         return f"Your beverage cup served: ... <ServedBeverage(type='{self.beverage_type}', timestamp='{self.timestamp}', result='{self.result}')>"
-    
+
+
 # Initialize the database engine and create tables if they don't exist
 engine = create_engine(DATABASE_URL)
 Base.metadata.create_all(engine)
