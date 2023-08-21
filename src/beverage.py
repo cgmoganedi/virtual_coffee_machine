@@ -55,7 +55,7 @@ class Coffee(Beverage):
             ))
         self.session.commit()
 
-        return f"Enjoy your coffee! ...☕ {str(required_ingredients)}\n"
+        return f"🟢 Done! Enjoy your coffee! ...☕ {str(required_ingredients)}\n"
 
 class Tea(Beverage):
     """Represents a tea beverage."""
@@ -81,4 +81,4 @@ class Tea(Beverage):
             ))
         self.session.commit()
 
-        return f"Enjoy your tea! ...☕ {str(used_ingredients)}\n"
+        return f"🟢 Done! Enjoy your tea! ...☕ {str(used_ingredients)}\n"
