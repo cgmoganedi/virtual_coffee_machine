@@ -29,8 +29,7 @@ class IngredientManager:
         if ingredient:
             ingredient.quantity = ingredient.max_capacity
             self.session.commit()
-            print(
-                f'Successfully increased {ingredient_name} by {ingredient.max_capacity}')
+            print(f'Successfully increased {ingredient_name} to {ingredient.max_capacity} {ingredient.unit_of_measure}')
         else:
             raise ValueError(f"Ingredient {ingredient_name} not found")
 
