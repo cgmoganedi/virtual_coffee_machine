@@ -9,6 +9,8 @@ class Beverage:
     def check_ingredient_levels(self, required_ingredients):
         """Check if there are enough ingredients to make the beverage."""
         for ingredient_name, required_quantity in required_ingredients.items():
+            if ingredient_name == 'frothed_milk':
+                continue
             ingredient = self.ingredient_manager.get_ingredient(ingredient_name)
             if not ingredient or ingredient.quantity < required_quantity:
                 raise ValueError(f"Not enough {ingredient_name} to make the beverage. Enter R to re-fill all ingredients")
@@ -16,6 +18,8 @@ class Beverage:
     def update_ingredient_levels(self, used_ingredients):
         """Update ingredient levels after serving the beverage."""
         for ingredient_name, used_quantity in used_ingredients.items():
+            if ingredient_name == 'frothed_milk':
+                continue
             ingredient = self.ingredient_manager.get_ingredient(ingredient_name)
             ingredient.quantity -= used_quantity
             self.session.commit()
@@ -37,7 +41,7 @@ class Coffee(Beverage):
         if self.milk:
             required_ingredients['milk'] = 50
             required_ingredients['water'] = 150
-            required_ingredients['frothed_milk'] = self.frothed_milk
+            required_ingredients['frothed_milk'] = self.froth
         
         self.check_ingredient_levels(required_ingredients)
         self.update_ingredient_levels(required_ingredients)
