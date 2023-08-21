@@ -42,20 +42,6 @@ class ServedBeverage(Base):
         # Represent the coffee cup as a string
         # Includes information about milk, froth, strength, etc.
         return f"Your beverage cup served: ... <ServedBeverage(type='{self.beverage_type}', timestamp='{self.timestamp}', result='{self.result}')>"
-
-class IngredientRefill(Base):
-    """Tracks ingredient refills with timestamp and quantity added."""
-    __tablename__ = 'ingredient_refills'
-
-    id = Column(Integer, primary_key=True)
-    ingredient_id = Column(Integer)
-    timestamp = Column(DateTime(timezone=True), server_default=func.now(), default=datetime.utcnow)
-    quantity_added = Column(Integer)
-    
-    def __str__(self):
-        # Represent the coffee cup as a string
-        # May include information about milk, froth, strength, etc.
-        return f"Your refill: ...{self.ingredient_id} added {self.quantity_added}"
     
 # Initialize the database engine and create tables if they don't exist
 engine = create_engine(DATABASE_URL)
