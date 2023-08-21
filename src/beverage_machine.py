@@ -1,15 +1,15 @@
+import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from beverage import Coffee, Tea
-from models import Base, Ingredient, IngredientRefill
-
-import os
+from models import Base, Ingredient
 from dotenv import load_dotenv
 # Load environment variables from .env file
 load_dotenv()
 
 
-database_url = 'LIDIHOGIHODGIH'
+DATABASE_URL = os.getenv('DATABASE_URL')
+
 
 class IngredientManager:
     """Manages ingredient levels and refills."""
@@ -34,7 +34,7 @@ class CoffeeMachine:
     """Simulates a coffee machine and handles beverage making."""
     def __init__(self):
         # Set up SQLAlchemy engine, database tables and create a session
-        self.engine = create_engine(database_url)
+        self.engine = create_engine(DATABASE_URL)
         Base.metadata.create_all(self.engine)
         Session = sessionmaker(bind=self.engine)
         self.session = Session()
