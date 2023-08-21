@@ -4,6 +4,8 @@ from sqlalchemy.orm import sessionmaker
 from beverage import Coffee, Tea
 from models import Base, Ingredient
 from dotenv import load_dotenv
+
+from seeds import refill_all_ingredients, seed_ingredients
 # Load environment variables from .env file
 load_dotenv()
 
@@ -26,7 +28,7 @@ class IngredientManager:
         if ingredient:
             ingredient.quantity = ingredient.max_capacity
             self.session.commit()
-            print('Success fully increased {ingredient_name} by {quantity_added}')
+            print(f'Successfully increased {ingredient_name} by {ingredient.max_capacity}')
         else:
             raise ValueError(f"Ingredient {ingredient_name} not found")
 
@@ -40,7 +42,11 @@ class CoffeeMachine:
         self.session = Session()
         # Initialize IngredientManager
         self.ingredient_manager = IngredientManager(self.session)
+        # Seed the ingredient at first
+        # seed_ingredients(self.session)
 
+    def refill_all_ingredients(self)-> str:
+        return refill_all_ingredients(self.ingredient_manager)
 
     def gather_user_input(self):
         """Gather user input for milk, froth, and strength."""
@@ -51,7 +57,7 @@ class CoffeeMachine:
         strength = int(input("Select strength (1, 2, or 3): "))
         return milk, froth, strength
     
-    def make_coffee(self, milk, froth, strength):
+    def make_coffee(self):
         """Make a coffee with specified options."""
         milk, froth, strength = self.gather_user_input()
         coffee = Coffee(self.session, self.ingredient_manager, milk, froth, strength)
@@ -61,7 +67,7 @@ class CoffeeMachine:
         except ValueError as e:
             return str(e)
 
-    def make_tea(self, strength):
+    def make_tea(self):
         """Make a tea with specified strength."""
         strength = int(input("Select strength for tea (1, 2, or 3): "))
         tea = Tea(self.session, self.ingredient_manager, strength)
