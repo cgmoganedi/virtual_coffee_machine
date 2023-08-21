@@ -11,7 +11,7 @@ load_dotenv()
 
 
 DATABASE_URL = os.getenv('DATABASE_URL')
-PREPARING = '\n⏳ Preparing your hot beverage ... ⏳\n...\n'
+PREPARING = '\n⏳ Preparing your hot beverage ...\n'
 
 class IngredientManager:
     """Manages ingredient levels and refills."""
