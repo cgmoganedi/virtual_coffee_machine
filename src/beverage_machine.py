@@ -46,8 +46,8 @@ class CoffeeMachine:
         self.session = Session()
         # Initialize IngredientManager
         self.ingredient_manager = IngredientManager(self.session)
-        # Seed the ingredient at first
-        # seed_ingredients(self.session)
+        # Seed the ingredient, if needed
+        seed_ingredients(self.session)
 
     def refill_all_ingredients(self) -> str:
         return refill_all_ingredients(self.ingredient_manager)
