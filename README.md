@@ -54,10 +54,10 @@ The Coffee Machine Simulation is designed to replicate the experience of using a
 - Strength-1 coffee requires 5g of coffee beans, strength-2 requires 10g, and strength-3 requires 15g.
 - Strength-1 tea requires 1 unit of a tea bag, strength-2 requires 2, and strength-3 requires 3.
 - Whenever we re-fill an ingredient we fill it to max capacity.
+- The application assumes a SQL database for data storage.
 
 ## Future Features
-
-- Support for more beverage options and customizations.
+- Support for additional beverages, options and customizations (e.g., hot chocolate).
 - Integration with a GUI for a more interactive user experience.
 - User profiles for personalized preferences.
 - Integration with a payment system for ordering and payment processing.
@@ -92,17 +92,6 @@ For testing, the simulation includes unit tests, end-to-end tests, and integrati
 
 Virtual Coffee and Tea Machine Simulation
 Simulate a virtual coffee and tea machine that allows you to make various coffee and tea beverages with customizable options.
-
-# Table of Contents
-Description
-Features
-Usage
-Assumptions
-Future Features
-Tea and Coffee Making Process
-Design Rationale
-Collaboration and Team Support
-Description
 This Python application provides a simulation of a virtual coffee and tea machine. It allows users to create custom coffee and tea beverages by specifying options such as milk, froth, and strength.
 
 
@@ -110,23 +99,6 @@ This Python application provides a simulation of a virtual coffee and tea machin
 Create customized coffee and tea beverages.
 Manage ingredient levels (water, milk, coffee beans) and receive warnings for low levels.
 Record served beverages and ingredient refills for tracking.
-
-
-# Usage
-1. Install the required packages: `pip install -r requirements.txt`
-2. Set up the database and run migrations: ``
-3. Run the application: `python main.py`
-4. Follow the prompts to make coffee and tea selections.
-
-
-# Assumptions
-The application assumes a SQLite database for data storage.
-Ingredient capacities are pre-defined and not adjustable during runtime.
-
-# Future Features
-Support for additional beverages and options (e.g., hot chocolate).
-User-friendly GUI for an improved user experience.
-Integration with external APIs to fetch real-time ingredient levels.
 
 # Tea and Coffee Making Process
 The tea and coffee making processes share a common base class, Beverage, which handles ingredient checks and updates. Specific beverage classes (Coffee and Tea) implement brewing logic based on user input.
