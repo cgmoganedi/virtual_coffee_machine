@@ -11,7 +11,7 @@ class Beverage:
         for ingredient_name, required_quantity in required_ingredients.items():
             ingredient = self.ingredient_manager.get_ingredient(ingredient_name)
             if not ingredient or ingredient.quantity < required_quantity:
-                raise ValueError(f"Not enough {ingredient_name} to make the beverage")
+                raise ValueError(f"Not enough {ingredient_name} to make the beverage. Enter R to re-fill all ingredients")
 
     def update_ingredient_levels(self, used_ingredients):
         """Update ingredient levels after serving the beverage."""
