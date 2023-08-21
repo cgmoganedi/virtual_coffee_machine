@@ -12,7 +12,8 @@ class TestCoffeeMachine(unittest.TestCase):
 
     def test_coffee_brew_successful(self):
         self.mock_ingredient_manager.get_ingredient.return_value.quantity = 200
-        coffee = Coffee(self.mock_session, self.mock_ingredient_manager, True, True, 2)
+        coffee = Coffee(self.mock_session,
+                        self.mock_ingredient_manager, True, True, 2)
         result = coffee.brew()
         self.assertIn("Enjoy your coffee!", result)
         self.mock_session.commit.assert_called()
@@ -23,6 +24,7 @@ class TestCoffeeMachine(unittest.TestCase):
         result = tea.brew()
         self.assertIn("Enjoy your tea!", result)
         self.mock_session.commit.assert_called()
+
 
 if __name__ == "__main__":
     unittest.main()

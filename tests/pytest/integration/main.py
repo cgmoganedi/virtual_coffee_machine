@@ -1,9 +1,11 @@
 import pytest
 from beverage_machine import CoffeeMachine
 
+
 @pytest.fixture
 def coffee_machine(session, ingredient_manager):
     return CoffeeMachine(session, ingredient_manager)
+
 
 def test_coffee_machine_make_coffee(coffee_machine, mocker):
     mocker.patch('builtins.input', side_effect=["yes", "yes", "2"])
