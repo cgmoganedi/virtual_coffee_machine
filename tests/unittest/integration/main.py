@@ -15,13 +15,13 @@ class TestCoffeeMachineIntegration(unittest.TestCase):
     @patch('builtins.input', side_effect=["yes", "yes", "2"])
     def test_make_coffee_integration(self, mock_input):
         result = self.coffee_machine.make_coffee()
-        self.assertIn("Enjoy your coffee!", result)
+        self.assertIn("coffee is now ready", result)
         self.mock_session.commit.assert_called()
 
     @patch('builtins.input', side_effect=["1"])
     def test_make_tea_integration(self, mock_input):
         result = self.coffee_machine.make_tea()
-        self.assertIn("Enjoy your tea!", result)
+        self.assertIn("tea is now ready", result)
         self.mock_session.commit.assert_called()
 
 

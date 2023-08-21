@@ -15,14 +15,14 @@ class TestCoffeeMachine(unittest.TestCase):
         coffee = Coffee(self.mock_session,
                         self.mock_ingredient_manager, True, True, 2)
         result = coffee.brew()
-        self.assertIn("Enjoy your coffee!", result)
+        self.assertIn("coffee is now ready", result)
         self.mock_session.commit.assert_called()
 
     def test_tea_brew_successful(self):
         self.mock_ingredient_manager.get_ingredient.return_value.quantity = 200
         tea = Tea(self.mock_session, self.mock_ingredient_manager, 1)
         result = tea.brew()
-        self.assertIn("Enjoy your tea!", result)
+        self.assertIn("tea is now ready", result)
         self.mock_session.commit.assert_called()
 
 

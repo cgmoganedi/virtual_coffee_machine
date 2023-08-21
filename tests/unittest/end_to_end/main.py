@@ -15,12 +15,12 @@ class TestCoffeeMachineEndToEnd(unittest.TestCase):
     @patch('builtins.input', side_effect=["yes", "yes", "2"])
     def test_make_coffee_with_user_input(self, mock_input):
         result = self.coffee_machine.make_coffee()
-        self.assertIn("Enjoy your coffee!", result)
+        self.assertIn("coffee is now ready", result)
 
     @patch('builtins.input', side_effect=["1"])
     def test_make_tea_with_user_input(self, mock_input):
         result = self.coffee_machine.make_tea()
-        self.assertIn("Enjoy your tea!", result)
+        self.assertIn("tea is now ready", result)
 
 
 if __name__ == "__main__":
