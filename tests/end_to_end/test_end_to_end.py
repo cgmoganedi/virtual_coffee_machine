@@ -1,10 +1,16 @@
 import pytest
-from beverage_machine import CoffeeMachine
+from unittest.mock import Mock
+from pytest_mock import mocker
+
+
+from src.beverage_machine import CoffeeMachine
 
 
 @pytest.fixture
-def coffee_machine(session, ingredient_manager):
-    return CoffeeMachine(session, ingredient_manager)
+def coffee_machine():
+    full_machine = CoffeeMachine()
+    full_machine.refill_all_ingredients()
+    return full_machine
 
 
 def test_make_coffee_with_input(coffee_machine, mocker):
