@@ -1,4 +1,4 @@
-from models import ServedBeverage
+from src.models import ServedBeverage
 
 class Beverage:
     """Base class for beverages like coffee and tea."""

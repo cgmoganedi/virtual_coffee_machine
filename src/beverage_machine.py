@@ -1,11 +1,11 @@
 import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from beverage import Coffee, Tea
-from models import Base, Ingredient
 from dotenv import load_dotenv
 
-from seeds import refill_all_ingredients, seed_ingredients
+from src.beverage import Coffee, Tea
+from src.models import Base, Ingredient
+from src.seeds import refill_all_ingredients, seed_ingredients
 # Load environment variables from .env file
 load_dotenv()
 

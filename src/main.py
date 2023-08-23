@@ -1,5 +1,5 @@
 
-from beverage_machine import CoffeeMachine
+from src.beverage_machine import CoffeeMachine
 
 
 def main():

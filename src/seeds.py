@@ -1,5 +1,5 @@
 
-from models import Ingredient
+from src.models import Ingredient
 
 
 def seed_ingredients(session) -> None:
